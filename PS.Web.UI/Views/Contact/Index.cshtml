@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br>
+<br />
+<br>
+<br />
+
+
+
+<style>
+
+
+
+
+    input[type=text], select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        input[type=submit]:hover {
+            background-color: #FF7F00;
+        }
+
+    .container1 {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+</style>
+
+<body>
+
+    <h3> Contact Form</h3>
+
+    <div class="container1">
+        <form id="contact" asp-controller="Contact" asp-action="SendMessage" method="post">
+
+            <label for="fname">First Name</label>
+            <input name="Name" type="text" id="Name" placeholder="Your name">
+
+
+            <label for="lname">Last Name</label>
+            <input name="Surname" type="text" id="Surname" placeholder="Your surname">
+
+            <label for="EMail">EMail</label>
+            <input name="EMail" type="text" id="EMail" placeholder="EMail">
+
+
+            <label for="amac">Purpose</label>
+            <select id="amac" name="amac">
+                <option value="1">Kullanıcı Geridönüşü</option>
+                <option value="2">İş Birliği</option>
+            </select>
+
+            <label for="subject">Subject</label>
+            <textarea name="Message" id="Message" placeholder="Your Message" style="height:200px"></textarea>
+
+            <input type="submit" id="form-submit" value="Submit">
+
+        </form>
+    </div>
+
+</body>

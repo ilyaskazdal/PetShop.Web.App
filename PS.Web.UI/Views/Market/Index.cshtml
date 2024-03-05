@@ -1,0 +1,74 @@
+﻿@using PS.Web.UI.Model
+@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br>
+<br />
+<br>
+<br />
+<br>
+<br />
+<vc:category-menu></vc:category-menu>
+<br>
+<br />
+<html lang="en">
+
+    
+    <body>
+        <div class="container mt-3">
+          <div class="row">
+              <div class="col-lg-8">
+                <div class="bg-white p-4">
+                    <h1 class="h4 mb-4">Popuplar Products</h1>
+
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="card bg-transparent border-0 mb-3">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="~/assets/images/@product.Image" class="img-fluid rounded" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <a asp-action="Details" asp-route-id="@product.ProductId" class="btn-link fw-bold">@product.ProductName</a>
+                                    <p> @product.ProductDescription</p>
+                                    <a>@product.UnitPrice</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr class="my-3" >
+                    }
+
+                </div>
+
+
+
+
+            </div>
+
+            <div class="col-lg-4">
+                
+                <vc:product-type-tags></vc:product-type-tags>
+              
+
+
+
+
+            </div>
+
+
+
+        </div> 
+    
+
+
+            </div>
+    </body>
+
+
+
+</html>
+
