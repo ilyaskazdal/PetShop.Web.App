@@ -1,0 +1,18 @@
+﻿@page
+<br>
+<br />
+<br>
+<br />
+<br>
+<br />
+
+<div class="text-center">
+    <h1>Siparişiniz için Teşekkür Ederiz</h1>
+    <p> Sipariş No: # @OrderId </p>
+    <a href="/" class="btn btn-primary">Anasayfa</a>
+</div>
+@functions{
+    [BindProperty(SupportsGet =true)]
+
+    public string? OrderId {get;set;}
+}

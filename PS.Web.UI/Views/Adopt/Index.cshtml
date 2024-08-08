@@ -63,13 +63,19 @@
                     font-size: 16px;
                 }
             </style>
+            @if (User.Identity!.IsAuthenticated)
+                        {
             <div class="col-lg-4">
-
                 <a href="/Adopt/Requests" class="orange-btn">Sahiplendirme İsteğinde Bulunun</a>
-
-
-
-            </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-4">
+                    <h4>Eğer sahiplendirme isteğinde bulanmak istiyorsanız üye olunuz</h4>
+                    <a href="/Users/Register" class="orange-btn">Üye Ol</a>
+                </div>
+            }
 
 
 

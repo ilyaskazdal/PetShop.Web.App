@@ -1,0 +1,56 @@
+﻿@page
+@model PS.Web.UI.Pages.CartModel
+@{
+}
+<br>
+<br />
+<br>
+<br />
+
+<h1>Sepet</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model?.Cart?.Items ?? Enumerable.Empty<CartItem>()){
+            <tr>
+                <td>@item.Quantity</td>
+                <td>@item.Product.ProductName</td>
+                <td>@item.Product.UnitPrice</td>
+                <td>
+                    @((item.Quantity * item.Product.UnitPrice).ToString()) ₺
+                </td>
+                <td>
+                    <form asp-page-handler="Remove">
+                        <input type="hidden" name="ProductId" value="@item.Product.ProductId">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Total:</td>
+            <td>
+                @Model?.Cart?.CalculateTotal() ₺
+            </td>
+        </tr>
+    </tfoot>
+
+
+</table>
+
+<div>
+    <a class="btn btn-primary" href="/Market">Alışverişe Devam Et</a>
+    <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Siparişi Ver</a>
+
+</div>

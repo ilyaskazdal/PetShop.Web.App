@@ -15,8 +15,17 @@
 <br>
 <br />
 <html lang="en">
+<style>
+    .warning {
+        border-color: #ff9800;
+        color: orange;
+    }
 
-
+        .warning:hover {
+            background: #ff9800;
+            color: white;
+        }</style>
+ 
 <body>
     <div class="container mt-3">
         <div class="row">
@@ -34,10 +43,14 @@
                                 <div class="col-8">
                                     <a asp-action="Details" asp-route-id="@product.ProductId" class="btn-link fw-bold">@product.ProductName</a>
                                     <p> @product.ProductDescription</p>
-                                    <a>@product.UnitPrice</a>
+                                    <a>@product.UnitPrice ₺</a>
                                 </div>
 
                             </div>
+                            <form asp-page="/Cart" method="post">
+                                <input type="hidden" asp-for="@product.ProductId" name="ProductId">
+                                <button type="submit" class="btn warning" style="float:right;">Sepete Ekle</button>
+                            </form>
                         </div>
                         <hr class="my-3">
                     }

@@ -22,5 +22,7 @@ namespace PS.Data.Concrete.EfCore
         public DbSet<ProductType> ProductTypes => Set<ProductType>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Adopt> Adopts => Set<Adopt>();
+
+        public DbSet<Order> Orders => Set<Order>();
     }
 }

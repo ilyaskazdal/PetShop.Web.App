@@ -14,7 +14,7 @@ namespace PS.Entity
         public string? ProductDescription { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal UnitPrice { get; set; }
+        public double UnitPrice { get; set; }
         public int UnitInStock { get; set; }
         public int CategoryId { get; set; }
         public int ProductTypeId { get; set; }

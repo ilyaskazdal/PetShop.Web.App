@@ -13,6 +13,5 @@ namespace PS.Entity
         public string UserEmail { get; set; }
         public string Password { get; set; }
 
-        public virtual ICollection<User> Users { get; set;} = new List<User>();
     }
 }

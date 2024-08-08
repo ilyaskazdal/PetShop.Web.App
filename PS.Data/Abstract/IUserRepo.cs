@@ -12,5 +12,8 @@ namespace PS.Data.Abstract
         IQueryable<User> Users { get; }
 
         void CreateUser(User User);
+
+        User GetUserById(int id);
+        void UpdateUser(User user);
     }
 }

@@ -1,0 +1,29 @@
+﻿@model PS.Web.UI.Model.UserUpdateViewModel
+
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+@using (Html.BeginForm("Update", "User", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.UserId)
+
+    <div>
+        @Html.LabelFor(model => model.UserName)
+        @Html.TextBoxFor(model => model.UserName)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.UserEmail)
+        @Html.TextBoxFor(model => model.UserEmail)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Password)
+        @Html.TextBoxFor(model => model.Password)
+    </div>
+
+    <button asp-action="Update" type="submit">Update</button>
+}

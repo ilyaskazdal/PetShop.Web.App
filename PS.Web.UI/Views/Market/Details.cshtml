@@ -14,6 +14,16 @@
 <br />
 <html>
 <vc:category-menu></vc:category-menu>
+<style>
+    .warning {
+        border-color: #ff9800;
+        color: orange;
+    }
+
+        .warning:hover {
+            background: #ff9800;
+            color: white;
+        }</style>
 <br>
 <br />
 <body>
@@ -26,11 +36,19 @@
                 </div>
         <div class="bg-white p-4">
             <h1 class="h4 mb-4">@Model.ProductName</h1>
-            <h1 class="h4 mb-4">@Model.UnitPrice</h1>
+            <h1 class="h4 mb-4">@Model.UnitPrice ₺</h1>
                     <p class ="h4 mb-4">
                         Stok: @Model.UnitInStock
                         
                     </p>
+                    
+                    
+                        <form asp-page="/Cart" method="post">
+                            <input type="hidden" asp-for="@Model.ProductId" name="ProductId">
+                            <button type="submit" class="btn warning" style="float:right;">Sepete Ekle</button>
+                        </form>
+                    
+
 
 
                 </div>

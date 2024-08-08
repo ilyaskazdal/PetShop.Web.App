@@ -32,8 +32,17 @@ namespace PS.Web.UI.Controllers
         }
 
         public IActionResult Requests() {
-            return View();
-        
+            if (User.Identity!.IsAuthenticated)
+            {
+               return View();
+
+            }
+            else
+            {
+return RedirectToAction("Index", "Home");
+            }
+            
+         
         }
 
         [HttpPost]

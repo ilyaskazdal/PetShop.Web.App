@@ -6,24 +6,62 @@
 <br />
 <br>
 <br />
-<h1>Admin bölgesi</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="sidebar"></div>
+        </div>
+        <div class="col-sm-7">
+            <h3>Admin Bölgesi</h3>
+          
+        </div>
+    </div>
+</div>
 
-<hr />
 
-<a href="/">Anasayfaya dönüş</a>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            <div class="sidebar"></div>
+        </div>
+        <div class="col-sm-8">
+           
+            <br />
+            <div>
+                <a href="@Url.Action("Index", "Products", new { area = "Admin" })"> Products </a>
+            </div>
+            <br />
+            <div>
+                <a href="/Admin/Categories">Categories</a>
+            </div>
+            <br />
+            <div>
+                 <a href="/Admin/Contact">Contacts</a>
 
-<hr />
-
-<a href="@Url.Action("Index", "Products", new { area = "Admin" })"> Products </a>
-
-    <br />
-
-    <a href="/Admin/Categories">Categories</a>
-
-        <br />
-
-        <a href="/Admin/Contact">Contacts</a>
-
+            </div>
             <br />
 
-            <a href="/Admin/Adopts">Adopt</a>
+            <div>
+                <a href="/Admin/Adopts">Adopt</a>
+            </div>
+            <br />
+
+            <div>
+                <a href="/Admin/Users">Users</a>
+            </div>
+            <br />
+
+            <div>
+                <a href="/Admin/Orders">Orders</a>
+            </div>
+            <br />
+
+            <div>
+                <a href="/">Anasayfaya dönüş</a>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="sidebar"></div>
+        </div>
+    </div>
+</div>

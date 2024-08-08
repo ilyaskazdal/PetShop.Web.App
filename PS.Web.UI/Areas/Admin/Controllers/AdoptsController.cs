@@ -35,7 +35,6 @@ namespace PS.Web.UI.Areas.Admin.Controllers
             
 
             var adopt = await _dbContext.Adopts
-                .Include(c=>c.User)
                 .FirstOrDefaultAsync(m => m.AdoptId == id);
             if (adopt == null)
             {

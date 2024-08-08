@@ -4,10 +4,14 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.ContentModel;
 using PS.Data.Abstract;
+using PS.Data.Concrete.EfCore;
 using PS.Entity;
 using PS.Web.UI.Model;
+using System.Net.NetworkInformation;
 using System.Security.Claims;
+
 
 namespace PS.Web.UI.Controllers
 {
@@ -78,7 +82,7 @@ namespace PS.Web.UI.Controllers
 
                     userClaims.Add(new Claim(ClaimTypes.Email, isUser.UserEmail ?? ""));
 
-                    if (isUser.UserEmail == "ilyaskazdal@gmail.com") {
+                    if (isUser.UserEmail == "ilyaskazdal@gmail.com" && isUser.UserId == 1 && isUser.UserName == "ilyas") {
 
                         userClaims.Add(new Claim(ClaimTypes.Role, "admin"));
                     }
@@ -109,15 +113,102 @@ namespace PS.Web.UI.Controllers
             return View(model); 
         }
 
-        public IActionResult Profile()
-
+        public ActionResult Profile()
         {
             string username = User.Identity.Name;
-            var user = _userRepo.Users.FirstOrDefault(x => x.UserName == username);
-                
+            var user = _userRepo.Users.FirstOrDefault(x => x.UserName == username); 
             return View(user);
+        }
+
+
+        public ActionResult Update(int id)
+        {
+            var user = _userRepo.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            
+            var viewModel = new UserUpdateViewModel
+            {
+                UserId = user.UserId,
+                UserName = user.UserName,
+                UserEmail = user.UserEmail,
+                Password = user.Password,
+                
+            };
+
+            return View(viewModel);
+
+        }
+        [HttpPost]
+        public ActionResult Update(UserUpdateViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            // Update user data in the database
+            var user = new User
+            {
+                UserId = viewModel.UserId,
+                UserName = viewModel.UserName,
+                UserEmail = viewModel.UserEmail,
+                Password = viewModel.Password,
+
+            };
+            _userRepo.UpdateUser(user);
+
+          
+            return RedirectToAction("Login", "Users", new { id = viewModel.UserId });
+        }
+        public IActionResult Search() { 
+            return View();
+        }
+
+        [HttpGet]
+        [Route("User")]
+        public IActionResult Search(String searchString)
+        {
+           
+
+            var users = from u in _userRepo.Users
+                        select u;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(u => u.UserName.Contains(searchString));
+
+                // Check if any user matches the search criteria
+                var foundUser = users.FirstOrDefault();
+                if (foundUser != null)
+                {
+                    // Redirect to the user's profile page
+                    return RedirectToAction("RelatedInfo", new { id = foundUser.UserId });
+                }
+            }
+
+            // If no user found or if search string is empty, display the search results
+            return View(users.ToList());
+
 
         }
 
+        [HttpGet]
+        [Route("User/RelatedInfo/{id}")]
+        public ActionResult RelatedInfo(int id)
+        {
+            // Retrieve user from database by id
+            var user = _userRepo.Users.FirstOrDefault(u => u.UserId == id);
+            if (user == null)
+            {
+                return NotFound(); // Or handle accordingly if user not found
+            }
+
+            // Pass necessary information related to the searched user to the view
+            return View(user);
+        }
     }
 }

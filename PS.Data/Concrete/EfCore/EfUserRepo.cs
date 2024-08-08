@@ -24,5 +24,16 @@ namespace PS.Data.Concrete.EfCore
             _context.Users.Add(User);
             _context.SaveChanges();
         }
+
+        public User GetUserById(int id)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserId == id);
+        }
+
+        public void UpdateUser(User user)
+        {
+            _context.Entry(user).State= Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
+        }
     }
 }

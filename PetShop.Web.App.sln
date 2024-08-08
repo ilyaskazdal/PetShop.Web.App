@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS.Web.UI", "..\PetShop.Web.App\PS.Web.UI\PS.Web.UI.csproj", "{F83395B7-58F5-41A6-8925-EF846290D1FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS.Web.UI", "PS.Web.UI\PS.Web.UI.csproj", "{F83395B7-58F5-41A6-8925-EF846290D1FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS.Entity", "..\PetShop.Web.App\PS.Entity\PS.Entity.csproj", "{994A92B8-5DB6-48D9-B4C6-960DB76A0541}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS.Entity", "PS.Entity\PS.Entity.csproj", "{994A92B8-5DB6-48D9-B4C6-960DB76A0541}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS.Data", "..\PetShop.Web.App\PS.Data\PS.Data.csproj", "{96E076CE-8AB3-4EAC-93E4-3F75EF4D2C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS.Data", "PS.Data\PS.Data.csproj", "{96E076CE-8AB3-4EAC-93E4-3F75EF4D2C12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

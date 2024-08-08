@@ -4,10 +4,12 @@ using PS.Data.Concrete.EfCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using PS.Web.UI.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<PSContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("PS.Web.UI")));
@@ -17,8 +19,13 @@ builder.Services.AddScoped<ICategoryRepo, EfCategoryRepo>();
 builder.Services.AddScoped<IProductTypeRepo, EfProductTypeRepo>();
 builder.Services.AddScoped<IUserRepo, EfUserRepo>();
 builder.Services.AddScoped<IAdoptRepo, EfAdoptRepo>();  
+builder.Services.AddScoped<IOrderRepo, EfOrderRepo>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<Cart>(x => CartSession.GetCart(x));
 
 var app = builder.Build();
 
@@ -32,6 +39,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
@@ -53,6 +61,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 
 
