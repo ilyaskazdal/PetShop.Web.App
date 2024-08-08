@@ -9,5 +9,7 @@ namespace PS.Data.Abstract
     public interface ICategoryRepo
     {
         IQueryable<Category> Categories { get; }
+
+        Category GetCategory(int id);
     }
 }

@@ -8,20 +8,21 @@ using System.Threading.Tasks;
 
 namespace PS.Data.Concrete.EfCore
 {
-    public class EfCategoryRepo : ICategoryRepo
+    public class EfAdoptRepo : IAdoptRepo
     {
         private PSContext _context;
 
-        public EfCategoryRepo(PSContext context)
+        public EfAdoptRepo(PSContext context)
         {
             _context = context;
         }
 
-        public IQueryable<Category> Categories => _context.Categories;
+        public IQueryable<Adopt> Adopts => _context.Adopts;
 
-        public Category GetCategory(int id)
+        public void CreateAdoptRequest(Adopt adopt)
         {
-            return _context.Categories.FirstOrDefault(c=>c.CategoryId==id);
+            _context.Adopts.Add(adopt);
+            _context.SaveChanges();
         }
     }
 }

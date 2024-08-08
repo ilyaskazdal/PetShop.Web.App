@@ -1,8 +1,50 @@
-﻿@model Category
+﻿@model List<Product>
+
 @{
     ViewData["Title"] = "Kategoriler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Kategoriler</h1>
+<br>
+<br />
+<br>
+<br />
+<br>
+<br />
+<html>
+<vc:category-menu></vc:category-menu>
+<br>
+<br />
+<body>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bg-white p-4">
+                    @foreach (var product in Model)
+                    {
+                        <div class="card bg-transparent border-0 mb-3">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="~/assets/images/@product.Image" class="img-fluid rounded" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <a asp-action="Details" asp-route-id="@product.ProductId" class="btn-link fw-bold">@product.ProductName</a>
+                                    <p> @product.ProductDescription</p>
+                                    <a>@product.UnitPrice</a>
+                                </div>
 
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                    }
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

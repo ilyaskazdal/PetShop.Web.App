@@ -13,7 +13,7 @@
         <h1> Login </h1>
         <br ></br>
         <div asp-validation-summary="All" class="text-danger"></div>
-        <form asp-controller="Users" asp-action="Login" method="post">
+        <form asp-controller="Users" asp-action="Login" method="post" novalidate>
             <div class="mb-3">
                 <label asp-for="UserEmail" class="form-label"></label>
                  <input asp-for="UserEmail" class="form-control">    

@@ -1,0 +1,86 @@
+﻿@using PS.Web.UI.Model
+@model AdoptViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br>
+<br />
+<br>
+<br />
+<br>
+<br />
+<vc:category-menu></vc:category-menu>
+<br>
+<br />
+<html lang="en">
+
+
+<body>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bg-white p-4">
+                    <h1 class="h4 mb-4">Sahiplendirme İstekleri</h1>
+
+                    @foreach (var adopt in Model.Adopts)
+                    {
+                        <div class="card bg-transparent border-0 mb-3">
+                            <div class="row">
+                                
+                                <div class="col-8">
+                                    <a asp-action="Details" asp-route-id="@adopt.AdoptId" class="btn-link fw-bold">@adopt.AnimalName</a>
+                                    <p> @adopt.AnimalDescription</p>
+                                    
+                                    @if (adopt.Gender == true) {<a>Male</a> }
+                                    else{<a>Female</a>}
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                    }
+
+                </div>
+
+
+
+
+            </div>
+
+            <style>
+                .orange-btn {
+                    background-color: orange;
+                    color: white;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                }
+            </style>
+            <div class="col-lg-4">
+
+                <a href="/Adopt/Requests" class="orange-btn">Sahiplendirme İsteğinde Bulunun</a>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+</body>
+
+
+
+</html>
+

@@ -1,4 +1,6 @@
 ﻿using PS.Entity;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace PS.Web.UI.Model
 {
@@ -8,7 +10,8 @@ namespace PS.Web.UI.Model
 
         public List<Category> Categories { get; set; } = new();
 
-        public ProductViewModel() {  }   
+        public User User { get; set; }
+
         
     }
 }

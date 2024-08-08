@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
@@ -11,12 +12,13 @@ using PS.Web.UI.Model;
 namespace PS.Web.UI.Controllers
 {
     
+
     public class MarketController : Controller
     {
         
         
-        private IProductRepo _productRepository;
-        private PSContext _psContext;
+        private readonly IProductRepo _productRepository;
+        private readonly PSContext _psContext;
 
 
         public MarketController(IProductRepo repository,PSContext pSContext)
@@ -26,19 +28,20 @@ namespace PS.Web.UI.Controllers
             
         }
 
+       
         public IActionResult Index()
         {
+            return View(new ProductViewModel
+            {
+                Products = _productRepository.Products.ToList()
 
-            return View(
-                new ProductViewModel
-                {
-                    Products = _productRepository.Products.ToList()
+            }
+           );
 
-                }
-                
-                );
-          
+
         }
+
+      
 
         public async Task<IActionResult> Details(int id)
         {
@@ -58,11 +61,13 @@ namespace PS.Web.UI.Controllers
              
         }
 
+        
+
         public async Task<IActionResult> Kategoriler(int id) {
-            var category = await _psContext.Categories
-                
-                .FirstOrDefaultAsync(b=>b.CategoryId==id);
-            return View(category);
+           
+            var products =await _productRepository.Products.Where(p => p.CategoryId == id).ToListAsync();
+  
+            return View(products);
         }
 
 

@@ -17,10 +17,12 @@ namespace PS.Web.UI.Controllers
 
         }
         public IActionResult Index()
-        {   
-            return View(_contactRepo.Contacts.ToList());
+        {
+            
+            return View();
         }
-       
+
+        [HttpPost]
         public IActionResult SendMessage(Contact contact)
         {
             

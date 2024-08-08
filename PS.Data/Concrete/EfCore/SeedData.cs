@@ -61,7 +61,7 @@ namespace PS.Data.Concrete.EfCore
                             UnitPrice = 10,
                             UnitInStock = 5,
                             CategoryId = 1,
-                            Image = "köpekmamasi.jpg"
+                            Image = "kopekmamasi.jpg"
 
                         },
                     new Product
@@ -98,7 +98,7 @@ namespace PS.Data.Concrete.EfCore
                         UnitPrice = 20,
                         UnitInStock = 50,
                         CategoryId = 1,
-                        Image = "köpekoyuncagı.jpg"
+                        Image = "kopekoyuncagi.jpg"
 
 
                     });

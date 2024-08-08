@@ -13,7 +13,7 @@
     <title>PetShop İlyas Kazdal öğrenme amaçlı site tasarımı</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
@@ -58,7 +58,7 @@
                             <a class="nav-link" href="/Market">Market</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="blog.html">Sahiplendirme</a>
+                            <a class="nav-link" href="/Adopt">Sahiplendirme</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Contact">Iletişim</a>
@@ -66,19 +66,28 @@
                         @if (User.Identity!.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="/">@User.Identity.Name</a>
+                                <a class="nav-link" href="/Users/Profile/@User.Identity.Name">@User.Identity.Name</a>
+                                   <a class="nav-link" >Sepet</a>
+                                
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Users/Logout" class="nav-link">Logout</a> 
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="/Users">Giriş Yap</a>
+                                <a class="nav-link" href="/Users/login">Giriş Yap</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Users/Register">Üye ol</a>
                             </li>
                         }
-                        @if (User.Identity.Name == "ilyas")
+                       
+                        @if (User.IsInRole("admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="/Admin">Admin</a>
+                                <a class="nav-link "asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
                             </li>
                         }
 
@@ -121,8 +130,8 @@
     </footer>
     <!-- ***** Footer end ***** -->
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Additional Scripts -->
     <script src="~/assets/js/custom.js"></script>

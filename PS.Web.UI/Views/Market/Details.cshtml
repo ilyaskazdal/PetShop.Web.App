@@ -10,26 +10,39 @@
 <br />
 <br>
 <br />
-
-
+<br>
+<br />
+<html>
+<vc:category-menu></vc:category-menu>
+<br>
+<br />
+<body>
+    <div class="container mt-3">
 <div class="row">
-    <div class="col-lg-8">
+            <div class="col-lg-8">
+                <div>
+                    <img src="~/assets/images/@Model.Image" class="img-fluid rounded">
+                   
+                </div>
         <div class="bg-white p-4">
             <h1 class="h4 mb-4">@Model.ProductName</h1>
+            <h1 class="h4 mb-4">@Model.UnitPrice</h1>
+                    <p class ="h4 mb-4">
+                        Stok: @Model.UnitInStock
+                        
+                    </p>
 
-            <div>
-                <img src="~/assets/images/@Model.Image" class="img-fluid rounded">
-                @Model.ProductDescription
-            </div>
 
-        </div>
+                </div>
     </div>
 
     <div class="col-lg-4">
-        
     </div>
 
 </div>
+    </div>
+</body>
+</html>
 
 
 

@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Azure.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PS.Data.Abstract;
+using PS.Entity;
 using PS.Web.UI.Model;
 using System.Security.Claims;
 
@@ -16,10 +20,48 @@ namespace PS.Web.UI.Controllers
             _userRepo = userRepo;
         }
 
-        public IActionResult Index() { 
+        public IActionResult Login() {
+            if (User.Identity!.IsAuthenticated)
+            {
+                return RedirectToAction("Index","Home");
+
+            }
             return View(); 
         }
+        public IActionResult Register() { 
+        return View();
+        }
         
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userRepo.Users.FirstOrDefaultAsync(x=> x.UserName == model.UserName || x.UserEmail == model.UserEmail );
+                if (user == null)
+                {
+                    _userRepo.CreateUser(new User {
+                         
+                        UserName = model.UserName,
+                         UserEmail = model.UserEmail,
+                         Password = model.Password
+                    });
+                    return RedirectToAction("Login", "Users");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Kullanıcı adı veya Email başka bir kullanıcı tarafından kullanılıyor");
+                };
+                return RedirectToAction("Login");
+            }
+            return View(model);
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index","Home");
+        }
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model) { 
             if (ModelState.IsValid)
@@ -32,9 +74,9 @@ namespace PS.Web.UI.Controllers
 
                     userClaims.Add(new Claim(ClaimTypes.NameIdentifier, isUser.UserId.ToString()));
 
-                    userClaims.Add(new Claim(ClaimTypes.NameIdentifier, isUser.UserName ?? ""));
+                    userClaims.Add(new Claim(ClaimTypes.Name, isUser.UserName ?? ""));
 
-                    userClaims.Add(new Claim(ClaimTypes.NameIdentifier, isUser.UserEmail ?? ""));
+                    userClaims.Add(new Claim(ClaimTypes.Email, isUser.UserEmail ?? ""));
 
                     if (isUser.UserEmail == "ilyaskazdal@gmail.com") {
 
@@ -66,5 +108,16 @@ namespace PS.Web.UI.Controllers
            
             return View(model); 
         }
+
+        public IActionResult Profile()
+
+        {
+            string username = User.Identity.Name;
+            var user = _userRepo.Users.FirstOrDefault(x => x.UserName == username);
+                
+            return View(user);
+
+        }
+
     }
 }

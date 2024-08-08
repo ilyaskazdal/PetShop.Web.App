@@ -1,0 +1,74 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br >
+<br />
+<br>
+<br />
+
+<div class="row">
+    <div class="col-md-10">
+
+        <div class="container1">
+            <div>
+                <label for="fname">Kullanıcı adınız: @Model.UserName</label>
+            </div>
+
+            <div>  
+                <label for="lname">Email adresiniz: @Model.UserEmail</label>
+                </div>
+
+
+             
+
+
+            <style>
+                .password-container {
+                    position: relative;
+                }
+
+                .password-text {
+                    display: none;
+                }
+
+                .show-password-btn {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    cursor: pointer;
+                }
+            </style>
+            <script>
+                function togglePasswordVisibility() {
+                    var passwordText = document.getElementById("passwordText");
+                    var showPasswordBtn = document.getElementById("showPasswordBtn");
+
+                    if (passwordText.style.display === "none") {
+                        passwordText.style.display = "inline";
+                        showPasswordBtn.textContent = "Hide";
+                    } else {
+                        passwordText.style.display = "none";
+                        showPasswordBtn.textContent = "Show";
+                    }
+                }
+            </script>
+            
+
+                <div class="password-container">
+                    <span class="password-stars">Parolanız</span>
+                    <span id="passwordText" class="password-text">@Model.Password</span>
+                <button type="button" id="showPasswordBtn" class="show-password-btn" onclick="togglePasswordVisibility()">Show</button>
+                   
+                </div>
+            
+
+            
+        </div>
+    </div>
+
+
+
+</div>

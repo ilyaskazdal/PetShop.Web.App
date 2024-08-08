@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PS.Data.Concrete.EfCore;
 
@@ -11,9 +12,11 @@ using PS.Data.Concrete.EfCore;
 namespace PS.Web.UI.Migrations
 {
     [DbContext(typeof(PSContext))]
-    partial class PSContextModelSnapshot : ModelSnapshot
+    [Migration("20240313235956_adopt")]
+    partial class adopt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace PS.Web.UI.Migrations
 
                     b.HasKey("AdoptId");
 
-                    b.ToTable("Adopts", (string)null);
+                    b.ToTable("Adopts");
                 });
 
             modelBuilder.Entity("PS.Entity.Category", b =>
@@ -69,7 +72,7 @@ namespace PS.Web.UI.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("PS.Entity.Contact", b =>
@@ -107,7 +110,7 @@ namespace PS.Web.UI.Migrations
 
                     b.HasKey("ContactID");
 
-                    b.ToTable("Contacts", (string)null);
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("PS.Entity.Product", b =>
@@ -141,7 +144,7 @@ namespace PS.Web.UI.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("PS.Entity.ProductType", b =>
@@ -158,7 +161,7 @@ namespace PS.Web.UI.Migrations
 
                     b.HasKey("ProductTypeId");
 
-                    b.ToTable("ProductTypes", (string)null);
+                    b.ToTable("ProductTypes");
                 });
 
             modelBuilder.Entity("PS.Entity.User", b =>
@@ -183,7 +186,7 @@ namespace PS.Web.UI.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }
